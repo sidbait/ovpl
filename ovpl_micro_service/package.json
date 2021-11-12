@@ -1,0 +1,39 @@
+{
+  "name": "ovpl_micro_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "prod": "node app.js"
+  },
+  "author": "Siddhesh Bait",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-sanitize-middleware": "^1.0.3",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.2",
+    "winston": "^3.3.3"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2000",
+    "env": {
+      "NODE_ENV": "Development",
+      "PORT": 3001,
+      "HOST": "localhost",
+      "MODULE": "ovpl_micro_service",
+      "SQL_HOST": "localhost",
+      "SQL_PORT": "5432",
+      "SQL_DATABASE": "ovpl_v1",
+      "SQL_USER": "root",
+      "SQL_PASSWORD": "Admin@123"
+    }
+  }
+}
