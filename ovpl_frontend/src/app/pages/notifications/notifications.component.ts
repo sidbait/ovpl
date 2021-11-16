@@ -24,7 +24,7 @@ export class NotificationsComponent implements OnInit {
       switch(color){
         case 1:
         this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>Black Dashboard Angular</b> - a beautiful freebie for every web developer.', '', {
-           disableTimeOut: true,
+          disableTimeOut: false,
            closeButton: true,
            enableHtml: true,
            toastClass: "alert alert-info alert-with-icon",
@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
         break;
         case 2:
         this.toastr.success('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>Black Dashboard Angular</b> - a beautiful freebie for every web developer.', '', {
-           disableTimeOut: true,
+          disableTimeOut: false,
            closeButton: true,
            enableHtml: true,
            toastClass: "alert alert-success alert-with-icon",
@@ -42,7 +42,7 @@ export class NotificationsComponent implements OnInit {
         break;
         case 3:
         this.toastr.warning('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>Black Dashboard Angular</b> - a beautiful freebie for every web developer.', '', {
-           disableTimeOut: true,
+          disableTimeOut: false,
            closeButton: true,
            enableHtml: true,
            toastClass: "alert alert-warning alert-with-icon",
@@ -51,7 +51,7 @@ export class NotificationsComponent implements OnInit {
         break;
         case 4:
         this.toastr.error('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>Black Dashboard Angular</b> - a beautiful freebie for every web developer.', '', {
-           disableTimeOut: true,
+          disableTimeOut: false,
            enableHtml: true,
            closeButton: true,
            toastClass: "alert alert-danger alert-with-icon",
@@ -60,7 +60,7 @@ export class NotificationsComponent implements OnInit {
          break;
          case 5:
          this.toastr.show('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Welcome to <b>Black Dashboard Angular</b> - a beautiful freebie for every web developer.', '', {
-            disableTimeOut: true,
+            disableTimeOut: false,
             closeButton: true,
             enableHtml: true,
             toastClass: "alert alert-primary alert-with-icon",

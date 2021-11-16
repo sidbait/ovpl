@@ -23,6 +23,13 @@ export const ROUTES: RouteInfo[] = [
     class: ""
   },
   {
+    path: "/add-team",
+    title: "Teams",
+    rtlTitle: "",
+    icon: "icon-chart-pie-36",
+    class: "N"
+  },
+  {
     path: "/icons",
     title: "Icons",
     rtlTitle: "الرموز",
@@ -84,7 +91,7 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.menuItems = ROUTES.filter(menuItem => menuItem.class != 'N');
   }
   isMobileMenu() {
     if (window.innerWidth > 991) {

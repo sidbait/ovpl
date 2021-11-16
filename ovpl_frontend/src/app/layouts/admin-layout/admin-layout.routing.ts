@@ -7,12 +7,14 @@ import { NotificationsComponent } from "../../pages/notifications/notifications.
 import { UserComponent } from "../../pages/user/user.component";
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
-import { TeamsComponent } from "src/app/pages/teams/teams.component";
+import { TeamsComponent } from "src/app/pages/teams/viewTeams/teams.component";
+import { AddTeamComponent } from "src/app/pages/teams/addTeams/add-team.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "teams", component: TeamsComponent },
+  { path: "add-team/:team_id", component: AddTeamComponent },
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapComponent },
   { path: "notifications", component: NotificationsComponent },

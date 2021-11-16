@@ -25,8 +25,9 @@ router.post('/add', async (req, res) => {
 
         if (error) {
             if (error.details)
-                return sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.details[0].message);
-            else return sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.message);
+                sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.details[0].message);
+            else sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.message);
+            return;
         }
 
         const addTeamResult = await teamService.addTeam(teamDetails);
@@ -35,6 +36,55 @@ router.post('/add', async (req, res) => {
         }
 
         sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Team added successfully!');
+        return;
+
+    } catch (error) {
+        console.error("catch error", error);
+        sendResponse(res, API_STATUS_MASTER.INTERNAL_SERVER_ERROR, false, {}, 'Something Went Wrong!');
+    }
+
+})
+
+
+
+router.post('/update', async (req, res) => {
+
+    try {
+
+        const teamDetails = new teamModel.UpdateTeam(req.body);
+        const { error } = teamModel.validateUpdateTeam(teamDetails);
+
+        if (error) {
+            if (error.details)
+                sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.details[0].message);
+            else sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, error.message);
+            return;
+        }
+
+        const result = await teamService.updateTeam(teamDetails);
+        const data = {
+            team_id : teamDetails.team_id
+        }
+
+        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Team updated successfully!');
+        return;
+
+    } catch (error) {
+        console.error("catch error", error);
+        sendResponse(res, API_STATUS_MASTER.INTERNAL_SERVER_ERROR, false, {}, 'Something Went Wrong!');
+    }
+
+})
+
+
+router.post('/get', async (req, res) => {
+
+    try {
+
+        const filterData = req.body;
+        const result = await teamService.getAllTeams(filterData);
+        const data = result;
+        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Data Found!');
         return;
 
     } catch (error) {
