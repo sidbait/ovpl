@@ -5,23 +5,18 @@ const bodyParser = require("body-parser");
 const { API_STATUS_MASTER } = require('../constants/STATUS')
 
 const { sendResponse } = require('../helpers/sendResponseHelper')
-const teamModel = require('../model/teamModel')
-const teamService = require('../services/teamService')
+const ballModel = require('../model/ballModel')
+const ballService = require('../services/ballService')
 
 router.use(bodyParser.json({ limit: "5mb" }));
 router.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
-
-router.get('/team', async (req, res) => {
-    console.log("asdasdas");
-    res.send("Hello")
-})
 
 router.post('/add', async (req, res) => {
 
     try {
 
-        const teamDetails = new teamModel.Team(req.body);
-        const { error } = teamModel.validateTeam(teamDetails);
+        const ballDetails = new ballModel.Ball(req.body);
+        const { error } = ballModel.validateBall(ballDetails);
 
         if (error) {
             if (error.details)
@@ -30,12 +25,41 @@ router.post('/add', async (req, res) => {
             return;
         }
 
-        const addTeamResult = await teamService.addTeam(teamDetails);
-        const data = {
-            team_id: addTeamResult
+        const isOverExists = await ballService.checkOverExists(ballDetails.over_id);
+
+        if (!isOverExists) {
+            sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, 'over_id is not exists!');
+            return;
         }
 
-        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Team added successfully!');
+        const isOverCompleted = await ballService.checkOverCompleted(ballDetails.over_id);
+
+        if (isOverCompleted >= 6) {
+            sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, 'This over is already completed!');
+            return;
+        }
+
+        const matchDetails = await ballService.getMatchDetailsByOver(ballDetails.over_id);
+        const isBatsmanValid = await ballService.checkValidBatsman(ballDetails, matchDetails);
+
+        if (!isBatsmanValid) {
+            sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, 'Invalid Batsman!');
+            return;
+        }
+
+        const isBowlerValid = await ballService.checkValidBowler(ballDetails);
+
+        if (!isBowlerValid) {
+            sendResponse(res, API_STATUS_MASTER.BAD_REQUEST, false, {}, 'Invalid Bowler!');
+            return;
+        }
+
+        const result = await ballService.addBall(ballDetails);
+        const data = {
+            ball_id: result
+        }
+
+        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Ball added successfully!');
         return;
 
     } catch (error) {
@@ -44,6 +68,8 @@ router.post('/add', async (req, res) => {
     }
 
 })
+
+
 
 router.post('/update', async (req, res) => {
 
@@ -59,9 +85,9 @@ router.post('/update', async (req, res) => {
             return;
         }
 
-        const result = await teamService.updateTeam(teamDetails);
+        const result = await ballService.updateTeam(teamDetails);
         const data = {
-            team_id : teamDetails.team_id
+            team_id: teamDetails.team_id
         }
 
         sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Team updated successfully!');
@@ -74,12 +100,13 @@ router.post('/update', async (req, res) => {
 
 })
 
+
 router.post('/get', async (req, res) => {
 
     try {
 
         const filterData = req.body;
-        const result = await teamService.getAllTeams(filterData);
+        const result = await ballService.getAllTeams(filterData);
         const data = result;
         sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Data Found!');
         return;

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sanitizeRequest = require('express-sanitize-middleware');
 const teamRoute = require('../routes/teamRoute')
+const ballRoute = require('../routes/ballRoute')
 
 module.exports = function (app, server) {
     app.use(express.json());
@@ -48,5 +49,6 @@ module.exports = function (app, server) {
     app.use(removeCSVInjection)
 
     app.use("/api/v1/teams", teamRoute);
+    app.use("/api/v1/ball", ballRoute);
 
 };

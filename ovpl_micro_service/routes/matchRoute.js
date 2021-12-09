@@ -5,23 +5,18 @@ const bodyParser = require("body-parser");
 const { API_STATUS_MASTER } = require('../constants/STATUS')
 
 const { sendResponse } = require('../helpers/sendResponseHelper')
-const teamModel = require('../model/teamModel')
+const matchModel = require('../model/matchModel')
 const teamService = require('../services/teamService')
 
 router.use(bodyParser.json({ limit: "5mb" }));
 router.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
 
-router.get('/team', async (req, res) => {
-    console.log("asdasdas");
-    res.send("Hello")
-})
-
 router.post('/add', async (req, res) => {
 
     try {
 
-        const teamDetails = new teamModel.Team(req.body);
-        const { error } = teamModel.validateTeam(teamDetails);
+        const matchDetails = new matchModel.Match(req.body);
+        const { error } = matchModel.validateMatch(matchDetails);
 
         if (error) {
             if (error.details)
@@ -30,9 +25,9 @@ router.post('/add', async (req, res) => {
             return;
         }
 
-        const addTeamResult = await teamService.addTeam(teamDetails);
+        const result = await teamService.addTeam(matchDetails);
         const data = {
-            team_id: addTeamResult
+            team_id: result
         }
 
         sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Team added successfully!');
@@ -44,6 +39,8 @@ router.post('/add', async (req, res) => {
     }
 
 })
+
+
 
 router.post('/update', async (req, res) => {
 
@@ -73,6 +70,7 @@ router.post('/update', async (req, res) => {
     }
 
 })
+
 
 router.post('/get', async (req, res) => {
 
