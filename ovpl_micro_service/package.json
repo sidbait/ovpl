@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "prod": "node app.js"
+    "start": "nodemon index.js",
+    "prod": "node index.js"
   },
   "author": "Siddhesh Bait",
   "license": "ISC",
@@ -33,7 +33,7 @@
       "SQL_PORT": "5432",
       "SQL_DATABASE": "ovpl_v1",
       "SQL_USER": "root",
-      "SQL_PASSWORD": "Admin@123"
+      "SQL_PASSWORD": "root@123"
     }
   }
 }

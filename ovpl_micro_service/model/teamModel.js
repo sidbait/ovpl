@@ -8,6 +8,8 @@ const Team = function (teamDetails) {
     this.status = teamDetails.status ? teamDetails.status : DB_STATUS_MASTER.ACTIVE;
 };
 
+
+
 const validateTeam = (teamDetails) => {
 
     const teamSchema = Joi.object({
@@ -30,6 +32,7 @@ const UpdateTeam = function (teamDetails) {
     this.team_motto = teamDetails.team_motto;
     this.status = teamDetails.status ? teamDetails.status : DB_STATUS_MASTER.ACTIVE;
 };
+
 
 const validateUpdateTeam = (teamDetails) => {
 

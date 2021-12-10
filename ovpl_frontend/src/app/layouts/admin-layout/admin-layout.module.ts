@@ -17,6 +17,9 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TeamsComponent } from "src/app/pages/teams/viewTeams/teams.component";
 import { AddTeamComponent } from "src/app/pages/teams/addTeams/add-team.component";
+import { PlayersComponent } from "src/app/pages/players/viewPlayers/players.component";
+import { AddPlayerComponent } from "src/app/pages/players/addPlayers/add-player.component";
+
 
 @NgModule({
   imports: [
@@ -36,7 +39,10 @@ import { AddTeamComponent } from "src/app/pages/teams/addTeams/add-team.componen
     NotificationsComponent,
     MapComponent,
     TeamsComponent,
-    AddTeamComponent
+    AddTeamComponent,
+    PlayersComponent,
+    AddPlayerComponent
+
     // RtlComponent
   ]
 })

@@ -1,0 +1,43 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Players
+            <a [routerLink]='["/add-player",""]' class="btn btn-fill btn-danger r-btn">Add Player</a>
+          </h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Id</th>
+                  <th>Player Name</th>
+                  <th>Bat</th>
+                  <th>Bowl</th>
+                  <th>Wicket</th>
+                  <th>Captain</th>
+                  <th class=" text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let team of playerList">
+                  <td>{{player.player_id}}</td>
+                  <td>{{player.player_name}}</td>
+                  <td>{{player.player_bat}}</td>
+                  <td>{{player.player_bowl}}</td>
+                  <td>{{player.player_wicket}}</td>
+                  <td>{{player.player_captain}}</td>
+                  <td class=" text-center"> <button class=" btn btn-link" type="button" placement="center" ngbTooltip="Edit Task" container="body" [routerLink]='["/add-player",player.player_id]'>
+                    <i class=" tim-icons icon-pencil"> </i>
+                  </button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

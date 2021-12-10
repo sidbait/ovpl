@@ -5,16 +5,20 @@ const bodyParser = require("body-parser");
 const { API_STATUS_MASTER } = require('../constants/STATUS')
 
 const { sendResponse } = require('../helpers/sendResponseHelper')
-const teamModel = require('../model/teamModel')
-const teamService = require('../services/teamService')
+
+const playerModel = require('../model/playerModel')
+const playerService = require('../services/playerService')
 
 router.use(bodyParser.json({ limit: "5mb" }));
 router.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
 
-router.get('/team', async (req, res) => {
-    console.log("team");
+
+
+router.get('/player', async (req, res) => {
+    console.log("player");
     res.send("Hello")
 })
+
 
 
 
@@ -22,8 +26,8 @@ router.post('/add', async (req, res) => {
 
     try {
 
-        const teamDetails = new teamModel.Team(req.body);
-        const { error } = teamModel.validateTeam(teamDetails);
+        const playerDetails = new playerModel.Player(req.body);
+        const { error } = playerModel.validatePlayer(playerDetails);
 
         if (error) {
             if (error.details)
@@ -32,12 +36,12 @@ router.post('/add', async (req, res) => {
             return;
         }
 
-        const addTeamResult = await teamService.addTeam(teamDetails);
+        const addPlayerResult = await playerService.addPlayer(playerDetails);
         const data = {
-            team_id: addTeamResult
+            player_id: addPlayerResult
         }
 
-        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Team added successfully!');
+        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Player added successfully!');
         return;
 
     } catch (error) {
@@ -46,7 +50,6 @@ router.post('/add', async (req, res) => {
     }
 
 })
-
 
 
 
@@ -55,8 +58,8 @@ router.post('/update', async (req, res) => {
 
     try {
 
-        const teamDetails = new teamModel.UpdateTeam(req.body);
-        const { error } = teamModel.validateUpdateTeam(teamDetails);
+        const playerDetails = new playerModel.UpdatePlayer(req.body);
+        const { error } = playerModel.validateUpdatePlayer(playerDetails);
 
         if (error) {
             if (error.details)
@@ -65,12 +68,12 @@ router.post('/update', async (req, res) => {
             return;
         }
 
-        const result = await teamService.updateTeam(teamDetails);
+        const result = await teamService.UpdatePlayer(playerDetails);
         const data = {
-            team_id : teamDetails.team_id
+            player_id : playerDetails.player_id
         }
 
-        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Team updated successfully!');
+        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Player updated successfully!');
         return;
 
     } catch (error) {
@@ -79,6 +82,7 @@ router.post('/update', async (req, res) => {
     }
 
 })
+
 
 
 
@@ -88,7 +92,7 @@ router.post('/get', async (req, res) => {
     try {
 
         const filterData = req.body;
-        const result = await teamService.getAllTeams(filterData);
+        const result = await playerService.getAllPlayers(filterData);
         const data = result;
         sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Data Found!');
         return;
@@ -99,7 +103,5 @@ router.post('/get', async (req, res) => {
     }
 
 })
-
-
 
 module.exports = router;
