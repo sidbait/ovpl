@@ -44,6 +44,20 @@ export const ROUTES: RouteInfo[] = [
     class: "N"
   },
   {
+    path: "/tournaments",
+    title: "Tournaments",
+    rtlTitle: "",
+    icon: "icon-chart-pie-36",
+    class: ""
+  },
+  {
+    path: "/add-tournament",
+    title: "Tournaments",
+    rtlTitle: "",
+    icon: "icon-chart-pie-36",
+    class: "N"
+  },
+  {
     path: "/icons",
     title: "Icons",
     rtlTitle: "الرموز",

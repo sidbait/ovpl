@@ -11,6 +11,8 @@ import { TeamsComponent } from "src/app/pages/teams/viewTeams/teams.component";
 import { AddTeamComponent } from "src/app/pages/teams/addTeams/add-team.component";
 import { PlayersComponent } from "src/app/pages/players/viewPlayers/players.component";
 import { AddPlayerComponent } from "src/app/pages/players/addPlayers/add-player.component";
+import { TournamentsComponent } from "src/app/pages/tournaments/viewTournaments/tournaments.component";
+import { AddTournamentComponent } from "src/app/pages/tournaments/addTournaments/add-tournament.component";
 
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
@@ -25,7 +27,9 @@ export const AdminLayoutRoutes: Routes = [
   { path: "tables", component: TablesComponent },
   { path: "typography", component: TypographyComponent },
   { path: "players", component: PlayersComponent},
-  { path: "add-player/:player_id", component: AddPlayerComponent}
+  { path: "add-player/:player_id", component: AddPlayerComponent},
+  { path: "tournaments", component: TournamentsComponent},
+  { path: "add-tournament/:tournament_id", component:AddTournamentComponent }
   
   // { path: "rtl", component: RtlComponent }
 ];

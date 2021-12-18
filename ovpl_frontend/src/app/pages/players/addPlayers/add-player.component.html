@@ -24,6 +24,18 @@
               </div>
             </div>
             <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+
+                <label> Team* </label>
+                <select class="form-control" id="team_id" formControlName="team_id">
+                  <option value="" selected>--Select Team--</option>
+                  <option *ngFor="let team of teamList" value={{team.team_id}}>{{team.team_name}}</option>
+
+                  <!-- <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option> -->
+                </select>
+              </div>
+            </div>
+            <div class=" row">
               <div class=" col-md-12">
                 <div class=" form-group">
                   <label> Bowl* </label>

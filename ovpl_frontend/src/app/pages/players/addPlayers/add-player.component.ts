@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { TeamService } from "../../teams/team.service";
 import { PlayerService } from "../player.service";
 
 @Component({
@@ -12,12 +13,14 @@ export class AddPlayerComponent implements OnInit {
 
   playerForm: FormGroup;
   player_id: any;
+  teamList: any;
 
   constructor(
     private playerService: PlayerService,
     private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private teamService: TeamService,
   ) {
 
     this.player_id = this.activatedRoute.snapshot.params['player_id'];
@@ -30,6 +33,8 @@ export class AddPlayerComponent implements OnInit {
     }); */
 
     this.initForm()
+
+
 
   }
 
@@ -47,6 +52,7 @@ export class AddPlayerComponent implements OnInit {
           this.playerForm = new FormGroup({
             player_name: new FormControl(data.data[0].player_name, [Validators.required]),
             player_bat: new FormControl(data.data[0].player_bat, [Validators.required]),
+            team_id : new FormControl(data.data[0].team_id, [Validators.required]),
             player_bowl: new FormControl(data.data[0].player_bowl, [Validators.required]),
             player_wicket: new FormControl(data.data[0].player_wicket, [Validators.required]),
             player_captain: new FormControl(data.data[0].player_captain, [Validators.required]),
@@ -61,6 +67,7 @@ export class AddPlayerComponent implements OnInit {
       this.playerForm = new FormGroup({
         player_name: new FormControl('', [Validators.required]),
         player_bat: new FormControl('', [Validators.required]),
+        team_id: new FormControl('', [Validators.required]),
         player_bowl: new FormControl('', [Validators.required]),
         player_wicket: new FormControl('', [Validators.required]),
         player_captain: new FormControl('', [Validators.required]),
@@ -73,6 +80,8 @@ export class AddPlayerComponent implements OnInit {
   ngOnInit() {
 
     console.log("Player", this.player_id);
+
+    this.getTeams();
 
   }
 
@@ -155,4 +164,14 @@ export class AddPlayerComponent implements OnInit {
 
 
   }
+
+  getTeams(payload:any = {}) {
+    this.teamService.getTeams(payload).subscribe((data: any) => {
+      console.log(data);
+      if (data.success) {
+        this.teamList = data.data;
+      }
+    })
+  }
+  
 }

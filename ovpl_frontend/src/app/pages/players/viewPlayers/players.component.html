@@ -14,17 +14,20 @@
                 <tr>
                   <th>Id</th>
                   <th>Player Name</th>
+                  <th>Team</th>
                   <th>Bat</th>
                   <th>Bowl</th>
                   <th>Wicket</th>
                   <th>Captain</th>
+                  
                   <th class=" text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let team of playerList">
+                <tr *ngFor="let player of playerList">
                   <td>{{player.player_id}}</td>
                   <td>{{player.player_name}}</td>
+                  <td>{{player.team_id ? player.team_id : "Not Assigned"}}</td>
                   <td>{{player.player_bat}}</td>
                   <td>{{player.player_bowl}}</td>
                   <td>{{player.player_wicket}}</td>

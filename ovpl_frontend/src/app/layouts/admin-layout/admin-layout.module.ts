@@ -19,6 +19,8 @@ import { TeamsComponent } from "src/app/pages/teams/viewTeams/teams.component";
 import { AddTeamComponent } from "src/app/pages/teams/addTeams/add-team.component";
 import { PlayersComponent } from "src/app/pages/players/viewPlayers/players.component";
 import { AddPlayerComponent } from "src/app/pages/players/addPlayers/add-player.component";
+import { TournamentsComponent } from "src/app/pages/tournaments/viewTournaments/tournaments.component";
+import { AddTournamentComponent } from "src/app/pages/tournaments/addTournaments/add-tournament.component";
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { AddPlayerComponent } from "src/app/pages/players/addPlayers/add-player.
     TeamsComponent,
     AddTeamComponent,
     PlayersComponent,
-    AddPlayerComponent
+    AddPlayerComponent,
+    TournamentsComponent,
+    AddTournamentComponent
 
     // RtlComponent
   ]

@@ -5,20 +5,16 @@ const bodyParser = require("body-parser");
 const { API_STATUS_MASTER } = require('../constants/STATUS')
 
 const { sendResponse } = require('../helpers/sendResponseHelper')
-
-const playerModel = require('../model/playerModel')
-const playerService = require('../services/playerService')
+const tournamentModel = require('../model/tournamentModel')
+const tournamentService = require('../services/tournamentService')
 
 router.use(bodyParser.json({ limit: "5mb" }));
 router.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
 
-
-
-router.get('/player', async (req, res) => {
-    console.log("player");
+router.get('/tournament', async (req, res) => {
+    console.log("tournament");
     res.send("Hello")
 })
-
 
 
 
@@ -26,8 +22,8 @@ router.post('/add', async (req, res) => {
 
     try {
 
-        const playerDetails = new playerModel.Player(req.body);
-        const { error } = playerModel.validatePlayer(playerDetails);
+        const tournamentDetails = new tournamentModel.Tournament(req.body);
+        const { error } = tournamentModel.validateTournament(tournamentDetails);
 
         if (error) {
             if (error.details)
@@ -36,12 +32,12 @@ router.post('/add', async (req, res) => {
             return;
         }
 
-        const addPlayerResult = await playerService.addPlayer(playerDetails);
+        const addTournamentResult = await tournamentService.addTournament(tournamentDetails);
         const data = {
-            player_id: addPlayerResult
+            tournament_id: addTournamentResult
         }
 
-        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Player added successfully!');
+        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Tournament added successfully!');
         return;
 
     } catch (error) {
@@ -50,6 +46,7 @@ router.post('/add', async (req, res) => {
     }
 
 })
+
 
 
 
@@ -58,8 +55,8 @@ router.post('/update', async (req, res) => {
 
     try {
 
-        const playerDetails = new playerModel.UpdatePlayer(req.body);
-        const { error } = playerModel.validateUpdatePlayer(playerDetails);
+        const tournamentDetails = new tournamentModel.UpdateTournament(req.body);
+        const { error } = tournamentModel.validateUpdateTournament(tournamentDetails);
 
         if (error) {
             if (error.details)
@@ -68,12 +65,12 @@ router.post('/update', async (req, res) => {
             return;
         }
 
-        const result = await playerService.updatePlayer(playerDetails)
+        const result = await tournamentService.updateTournament(tournamentDetails);
         const data = {
-            player_id : playerDetails.player_id
+            tournament_id : tournamentDetails.tournament_id
         }
 
-        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Player updated successfully!');
+        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'tournament updated successfully!');
         return;
 
     } catch (error) {
@@ -82,7 +79,6 @@ router.post('/update', async (req, res) => {
     }
 
 })
-
 
 
 
@@ -92,7 +88,7 @@ router.post('/get', async (req, res) => {
     try {
 
         const filterData = req.body;
-        const result = await playerService.getAllPlayers(filterData);
+        const result = await tournamentService.getAllTournaments(filterData);
         const data = result;
         sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Data Found!');
         return;
@@ -103,5 +99,7 @@ router.post('/get', async (req, res) => {
     }
 
 })
+
+
 
 module.exports = router;
