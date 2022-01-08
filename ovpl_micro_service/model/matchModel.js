@@ -19,14 +19,14 @@ const validateMatch = (matchDetails) => {
 
     const matchSchema = Joi.object({
         tournament_id: Joi.number().required(),
-        team_1: Joi.number().required(),
-        team_2: Joi.number().required(),
-        toss_won: Joi.number().allow("", null),
+        team_1: Joi.string().trim().allow("", null),
+        team_2: Joi.string().trim().allow("", null),
+        toss_won: Joi.string().trim().allow("", null),
         toss_decision: Joi.string().trim().allow("", null),
-        wickets_per_inn: Joi.number().required(),
-        overs_per_inn: Joi.number().required(),
-        max_overs_bowler: Joi.number().allow("", null),
-        mom: Joi.number().allow("", null),
+        wickets_per_inn: Joi.string().trim().allow("", null),
+        overs_per_inn: Joi.string().trim().allow("", null),
+        max_overs_bowler: Joi.string().trim().allow("", null),
+        mom: Joi.string().trim().allow("", null),
         label: Joi.string().trim().allow("", null),
         status: Joi.number().allow("", null)
     });
@@ -57,14 +57,14 @@ const validateUpdateMatch = (matchDetails) => {
     const matchSchema = Joi.object({
         match_id: Joi.number().required(),
         tournament_id: Joi.number().required(),
-        team_1: Joi.number().required(),
-        team_2: Joi.number().required(),
-        toss_won: Joi.number().allow("", null),
+        team_1: Joi.string().trim().allow("", null),
+        team_2: Joi.string().trim().allow("", null),
+        toss_won: Joi.string().trim().allow("", null),
         toss_decision: Joi.string().trim().allow("", null),
-        wickets_per_inn: Joi.number().required(),
-        overs_per_inn: Joi.number().required(),
-        max_overs_bowler: Joi.number().allow("", null),
-        mom: Joi.number().allow("", null),
+        wickets_per_inn: Joi.string().trim().allow("", null),
+        overs_per_inn: Joi.string().trim().allow("", null),
+        max_overs_bowler: Joi.string().trim().allow("", null),
+        mom: Joi.string().trim().allow("", null),
         label: Joi.string().trim().allow("", null),
         status: Joi.number().allow("", null)
     });

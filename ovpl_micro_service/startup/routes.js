@@ -5,6 +5,7 @@ const teamRoute = require('../routes/teamRoute')
 const playerRoute = require('../routes/playerRoute')
 const ballRoute = require('../routes/ballRoute')
 const tournamentRoute = require('../routes/tournamentRoute')
+const matchRoute = require('../routes/matchRoute')
 
 module.exports = function (app, server) {
     app.use(express.json());
@@ -54,4 +55,6 @@ module.exports = function (app, server) {
     app.use("/api/v1/ball", ballRoute);
     app.use("/api/v1/tournaments", tournamentRoute);
     app.use("/api/v1/players", playerRoute);
+    app.use("/api/v1/matches", matchRoute);
+
 };

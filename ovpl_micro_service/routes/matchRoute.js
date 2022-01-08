@@ -6,7 +6,7 @@ const { API_STATUS_MASTER } = require('../constants/STATUS')
 
 const { sendResponse } = require('../helpers/sendResponseHelper')
 const matchModel = require('../model/matchModel')
-const teamService = require('../services/teamService')
+const matchService = require('../services/matchService')
 
 router.use(bodyParser.json({ limit: "5mb" }));
 router.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
@@ -25,12 +25,12 @@ router.post('/add', async (req, res) => {
             return;
         }
 
-        const result = await teamService.addTeam(matchDetails);
+        const result = await matchService.addMatch(matchDetails);
         const data = {
-            team_id: result
+            match_id: result
         }
 
-        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Team added successfully!');
+        sendResponse(res, API_STATUS_MASTER.CREATED, true, data, 'Match added successfully!');
         return;
 
     } catch (error) {
@@ -46,8 +46,8 @@ router.post('/update', async (req, res) => {
 
     try {
 
-        const teamDetails = new teamModel.UpdateTeam(req.body);
-        const { error } = teamModel.validateUpdateTeam(teamDetails);
+        const matchDetails = new matchModel.UpdateMatch(req.body);
+        const { error } = matchModel.validateUpdateMatch(matchDetails);
 
         if (error) {
             if (error.details)
@@ -56,12 +56,12 @@ router.post('/update', async (req, res) => {
             return;
         }
 
-        const result = await teamService.updateTeam(teamDetails);
+        const result = await matchService.updateMatch(matchDetails);
         const data = {
-            team_id : teamDetails.team_id
+            match_id : matchDetails.match_id
         }
 
-        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Team updated successfully!');
+        sendResponse(res, API_STATUS_MASTER.OK, true, data, 'match updated successfully!');
         return;
 
     } catch (error) {
@@ -77,7 +77,7 @@ router.post('/get', async (req, res) => {
     try {
 
         const filterData = req.body;
-        const result = await teamService.getAllTeams(filterData);
+        const result = await matchService.getAllMatches(filterData);
         const data = result;
         sendResponse(res, API_STATUS_MASTER.OK, true, data, 'Data Found!');
         return;

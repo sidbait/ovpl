@@ -13,6 +13,8 @@ import { PlayersComponent } from "src/app/pages/players/viewPlayers/players.comp
 import { AddPlayerComponent } from "src/app/pages/players/addPlayers/add-player.component";
 import { TournamentsComponent } from "src/app/pages/tournaments/viewTournaments/tournaments.component";
 import { AddTournamentComponent } from "src/app/pages/tournaments/addTournaments/add-tournament.component";
+import { MatchesComponent } from "src/app/pages/matches/viewMatches/matches.component";
+import { AddMatchComponent } from "src/app/pages/matches/addMatches/add-match.component";
 
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
@@ -29,7 +31,9 @@ export const AdminLayoutRoutes: Routes = [
   { path: "players", component: PlayersComponent},
   { path: "add-player/:player_id", component: AddPlayerComponent},
   { path: "tournaments", component: TournamentsComponent},
-  { path: "add-tournament/:tournament_id", component:AddTournamentComponent }
+  { path: "add-tournament/:tournament_id", component:AddTournamentComponent },
+  { path: "matches", component: MatchesComponent},
+  { path: "add-match/:match_id", component: AddMatchComponent},
   
   // { path: "rtl", component: RtlComponent }
 ];

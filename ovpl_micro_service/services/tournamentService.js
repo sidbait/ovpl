@@ -4,7 +4,7 @@ const db = require('../config/db')
 const addTournament = async (tournamentDetails) => {
   try {
 
-    const _query = `INSERT INTO tournaments(tournament_id , tournament_name , label , duration) VALUES ('${tournamentDetails.tournament_id}', '${tournamentDetails.tournament_name}', '${tournamentDetails.label}', ${tournamentDetails.duration})`;
+    const _query = `INSERT INTO tournaments(tournament_name , label , duration) VALUES ('${tournamentDetails.tournament_name}', '${tournamentDetails.label}', '${tournamentDetails.duration}')`;
     const queryResult = await db.executeQuery(_query);
     console.log(queryResult);
     return queryResult.insertId;

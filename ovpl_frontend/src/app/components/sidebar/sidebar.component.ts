@@ -58,6 +58,20 @@ export const ROUTES: RouteInfo[] = [
     class: "N"
   },
   {
+    path: "/matches",
+    title: "Matches",
+    rtlTitle: "",
+    icon: "icon-chart-pie-36",
+    class: ""
+  },
+  {
+    path: "/add-match",
+    title: "Matches",
+    rtlTitle: "",
+    icon: "icon-chart-pie-36",
+    class: "N"
+  },
+  {
     path: "/icons",
     title: "Icons",
     rtlTitle: "الرموز",
